@@ -1,26 +1,37 @@
 // display current tasks in table
 const displayTasks = () => {
-  let toDoTable = ''
   $.getJSON("/alltasks")
   .then((tasks) => {
-    $.each(tasks, (i, task) => {
-      toDoTable += `
-      <tr class="old-task">
-      <td>${task.due_date}</td>
-      <td>${task.task}</td>
-      <td><a class="clear" id="${task.id}">Clear</a></td>
-      </tr>
-      `
-    })
+    if (tasks.length > 0) {
+      $.each(tasks, (i, task) => {
+        $('.tasks').append(`
+          <tr class="old-task">
+            <td>${task.due_date}</td>
+            <td>${task.task}</td>
+            <td><a class="clear" id="${task.id}">Clear</a></td>
+          </tr>
+          `
+        )
+      })
+    } else {
+      $('.tasks').append(`
+    <tr>
+      <td colspan="3">You have completed your toDo list, woohoo!</td>
+    </tr>
+    `)
+    }
   })
   .catch((err) => {
-    toDoTable = '<p>Could not retreive your list.</p>'
+    $('.tasks').append(`
+    <tr>
+      <td colspan="3">We could not retreive your tasks.</td>
+      <td coldpan="3">${err.message}</td>
+    </tr>
+    `)
   })
-  
-  $('.tasks').append(toDoTable)
 }
 
-
+displayTasks()
 
 
 

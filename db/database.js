@@ -1,7 +1,7 @@
-const pgp = require('pg-promise')();
-const { pgport, pguser, pgdatabase, pgpassword, pghost } = require('../config');
+const pgp = require('pg-promise')()
+const { pguser, pgport, pgdatabase, pgpassword, pghost } = require('../config')
 
-let connection = `postgres://${pguser}:${pgpassword}@${pghost}:${pgport}/${pgdatabase}`
+const connection = `postgres://${pguser}:${pgpassword}@${pghost}:${pgport}/${pgdatabase}`
 
 const db = pgp(connection);
 

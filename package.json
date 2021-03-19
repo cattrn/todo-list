@@ -6,6 +6,7 @@
   "scripts": {
     "create_database": "createdb todo",
     "create_tables": "psql -h localhost -d todo -f sql/create_tables.sql",
+    "seed_users": "psql -h localhost -d todo -f sql/seed_users.sql",
     "dev": "nodemon -r dotenv/config -e js,ejs,css,sql index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
