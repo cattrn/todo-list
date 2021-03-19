@@ -15,11 +15,12 @@ CREATE TABLE IF NOT EXISTS tasks (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id INT NOT NULL,
     task VARCHAR(255) NOT NULL,
+    due_date TIMESTAMPTZ,
     create_at TIMESTAMPTZ,
     update_at TIMESTAMPTZ DEFAULT now(),
 
     FOREIGN KEY(user_id)
-      REFERENCES users(user_id)
+      REFERENCES users(id)
       ON DELETE CASCADE
 );
 
