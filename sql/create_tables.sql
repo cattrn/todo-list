@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS tasks (
     user_id INT NOT NULL,
     task VARCHAR(255) NOT NULL,
     due_date TIMESTAMPTZ,
-    create_at TIMESTAMPTZ,
-    update_at TIMESTAMPTZ DEFAULT now(),
+    created_at TIMESTAMPTZ,
+    updated_at TIMESTAMPTZ DEFAULT now(),
 
     FOREIGN KEY(user_id)
       REFERENCES users(id)
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS email_confirmation (
     hash_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email VARCHAR(50) NOT NULL UNIQUE,
     hash CHAR(60) NOT NULL,
-    create_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
     FOREIGN KEY(email) 
       REFERENCES users(email)
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS password_reset (
     hash_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email VARCHAR(50) NOT NULL UNIQUE,
     hash CHAR(60) NOT NULL,
-    create_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
     FOREIGN KEY(email) 
       REFERENCES users(email)
