@@ -3,7 +3,6 @@ $('.submit-task').click(function (e) {
   e.preventDefault()
   let newTask = $('#task').val()
   let dueDate = $('#due_date').val()
-  console.log('Clicked')
 
   if (newTask !== '' && dueDate !== '') {
     $.ajax({
@@ -16,9 +15,13 @@ $('.submit-task').click(function (e) {
       })
     })
     .done(() => {
-      // displayTasks()
-      setTimeout(displayTasks, 300)
-      // TODO: remove this if no timing issues
+      $('.new-task-alert').after(`
+      <tr class="old-task">
+        <td>${inputDateConverter(dueDate)}</td>
+        <td>${newTask}</td>
+        <td><a class="clear" id="${task.id}">Clear</a></td>
+      </tr>
+      `);
     })
     .fail(() => {
       $('.new-task .alert').text('There was a problem submitting your task.')

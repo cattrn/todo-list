@@ -7,9 +7,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/newtask', (req, res) => {
-  console.log(typeof req.body.task)
-  console.log(req.body.due_date)
-  console.log(typeof req.body.due_date)
   db.none("INSERT INTO tasks(user_id, task, due_date, created_at) VALUES (1, $1, TO_TIMESTAMP($2, 'YYYY-MM-DD'), now())", [req.body.task, req.body.due_date])
   .then(() => {
     console.log('Successful')
