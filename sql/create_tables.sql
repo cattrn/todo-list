@@ -1,0 +1,50 @@
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password CHAR(60) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT false
+);
+
+DROP TABLE IF EXISTS tasks; 
+
+CREATE TABLE IF NOT EXISTS tasks (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id INT NOT NULL,
+    task VARCHAR(255) NOT NULL,
+    create_at TIMESTAMPTZ,
+    update_at TIMESTAMPTZ DEFAULT now(),
+
+    FOREIGN KEY(user_id)
+      REFERENCES users(user_id)
+      ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS email_confirmation;
+
+CREATE TABLE IF NOT EXISTS email_confirmation (
+    hash_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    hash CHAR(60) NOT NULL,
+    create_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+    FOREIGN KEY(email) 
+      REFERENCES users(email)
+      ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS password_reset;
+
+CREATE TABLE IF NOT EXISTS password_reset (
+    hash_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    hash CHAR(60) NOT NULL,
+    create_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+    FOREIGN KEY(email) 
+      REFERENCES users(email)
+      ON DELETE CASCADE
+);
