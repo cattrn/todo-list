@@ -1,0 +1,26 @@
+<h1>Welcome to your ToDo list</h1>
+<p>Tasks can be marked off by clicking on them but will stay in your list. In order to clear them from the list completely, click on the "Clear" button.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Due Date</th>
+            <th>Task</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="new-task">
+            <!-- This is going to be where people can insert new tasks -->
+            <td><label for="due_date" class="hidden"></label><input type="date" id="due_date" name="due_date" required></td>
+            <td><label for="task" class="hidden"></label><input type="text" id="task" name="task" required placeholder="What do you need to do?"></td>
+            <td><a class="submit-task">Submit</a></td>
+        </tr>
+        <!-- if (currentUser) -->
+        <% for (i = 0; i < tasks.length; i++) { %>
+            <tr class="old-task">
+                <td><%= tasks[i].due_date %></td>
+                <td><%= tasks[i].task %></td>
+                <td><a class="clear" id="<%= tasks[i].id %>">Clear</a></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
