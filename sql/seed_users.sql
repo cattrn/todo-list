@@ -1,7 +1,7 @@
-INSERT INTO users(firstname, lastname, email, password, is_active)
+INSERT INTO users(email, password, is_active)
 VALUES 
-('Elon', 'Musk', 'elon.musk@tesla.com', crypt('Gunsmoke&Lav1', gen_salt('bf')), true),
-('Harry', 'Potter', 'harry.potter@gmail.com', crypt('Gunsmoke&Lav1', gen_salt('bf')), true),
-('Anna', 'Karenina', 'anna.karenina@gmail.com', crypt('Gunsmoke&Lav1', gen_salt('bf')), true),
-('Scarlett', 'Ohara', 'scarlett.ohara@gmail.com', crypt('Gunsmoke&Lav1', gen_salt('bf')), true),
-('Elza', 'Oldenburg', 'elsa@frozen.com', crypt('Gunsmoke&Lav1', gen_salt('bf')), true);
+('elon.musk@tesla.com', crypt('Hello1', gen_salt('bf')), true),
+('harry.potter@gmail.com', crypt('Hello1', gen_salt('bf')), true),
+('anna.karenina@gmail.com', crypt('Hello1', gen_salt('bf')), true),
+('scarlett.ohara@gmail.com', crypt('Hello1', gen_salt('bf')), true),
+('elsa@frozen.com', crypt('Hello1', gen_salt('bf')), true);
