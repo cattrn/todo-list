@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/database.js');
+const passport = require('passport')
 
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.render('pages/home')
 })
 
