@@ -1,0 +1,27 @@
+<div class="signup vertical-center">
+  <div class="vertical-center-child">
+    <div class="flex-reverse">
+      <h1>Signup</h1>
+      <a href="/login">Login instead?</a>
+    </div>
+    <form method="POST" action="/signup">
+      <div>
+        <label class="hidden" for="email"></label>
+        <input id="email" type="text" name="email" placeholder="Email address">
+        <p class="alert hidden">Input invalid</p>
+      </div>
+      <div>
+        <label class="hidden" for="password"></label>
+        <input id="password" type="password" name="password" placeholder="Password">
+        <p class="alert hidden">Input invalid</p>
+      </div>
+      <div>
+        <label class="hidden" for="confirmPassword"></label>
+        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm password">
+        <p class="alert hidden">Input invalid</p>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<script src="/static/js/sharedValidation.js"></script>

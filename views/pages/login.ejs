@@ -1,0 +1,23 @@
+<div class="login vertical-center">
+  <div class="vertical-center-child">
+    <div class="flex">
+      <h1>Login</h1>
+      <a href="/signup">Signup instead?</a>
+    </div>
+    <form method="POST" action="/login">
+      <div>
+        <label class="hidden" for="email"></label>
+        <input id="email" type="text" name="email" placeholder="Email address">
+        <p class="alert hidden">Input invalid</p>
+      </div>
+      <div>
+        <label class="hidden" for="password"></label>
+        <input id="password" type="password" name="password" placeholder="Password">
+        <p class="alert hidden">Input invalid</p>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/forgot">Forgot your password?</a>
+  </div>
+</div>
+<script src="/static/js/sharedValidation.js"></script>

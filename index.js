@@ -7,6 +7,8 @@ const { port } = require("./config")
 
 // Require routes
 const homeRouter = require("./routes/home.js")
+const signupRouter = require("./routes/signup.js")
+const loginRouter = require("./routes/login.js")
 
 const app = express()
 
@@ -23,6 +25,8 @@ app.set('view engine', 'ejs')
 
 // Use routers
 app.use("/", homeRouter)
+app.use("/signup", signupRouter)
+app.use("/login", loginRouter)
 
 
 
