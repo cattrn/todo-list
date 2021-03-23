@@ -12,8 +12,10 @@ const { port } = require("./config")
 const homeRouter = require("./routes/home.js")
 const allTasksRouter = require("./routes/allTasks.js")
 const addTaskRouter = require("./routes/addTask.js")
+const settingsRouter = require("./routes/settings.js")
 const signupRouter = require("./routes/signup.js")
 const loginRouter = require("./routes/login.js")
+const logoutRouter = require("./routes/logout.js")
 const emailRouter = require("./routes/email.js")
 const apiRouter = require("./routes/api.js")
 
@@ -48,10 +50,12 @@ app.use(session({
 // Use routers
 app.use("/signup", redirectToHome, signupRouter)
 app.use("/login", redirectToHome, loginRouter)
+app.use("/logout", redirectToLogin, logoutRouter)
 app.use("/email", emailRouter)
 app.use("/api", redirectToLogin, apiRouter)
 app.use("/alltasks", redirectToLogin, allTasksRouter)
 app.use("/addtask", redirectToLogin, addTaskRouter)
+app.use("/settings", redirectToLogin, settingsRouter)
 app.use("/", redirectToLogin, homeRouter)
 
 
