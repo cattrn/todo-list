@@ -1,12 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db/database.js')
-const jwt = require('jsonwebtoken')
 const { compare } = require('bcryptjs')
 const { access_secret, refresh_secret } = require("../config")
-const passport = require('passport')
-const JwtStrategy = require('passport-jwt').Strategy
-const ExtractJwt = require('passport-jwt').ExtractJwt
 
 
 router.get('/', (req, res) => {

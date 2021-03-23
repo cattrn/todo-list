@@ -6,10 +6,6 @@ const expressLayouts = require('express-ejs-layouts')
 const session = require('express-session')
 const { redirectToLogin, redirectToHome } = require('./redirectMiddleware')
 
-// const passport = require('passport')
-// const JwtStrategy = require('passport-jwt').Strategy
-// const ExtractJwt = require('passport-jwt').ExtractJwt
-
 const { port } = require("./config")
 
 // Require routes
