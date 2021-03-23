@@ -10,5 +10,5 @@ module.exports = {
   access_secret: process.env.ACCESS_SECRET,
   refresh_secret: process.env.REFRESH_SECRET,
   
-  // sendgrid_api_key: process.env.SENDGRID_API_KEY,
+  sendgrid_api_key: process.env.SENDGRID_API_KEY,
 };

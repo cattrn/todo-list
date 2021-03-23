@@ -3,16 +3,20 @@ const db = require("./db/database")
 const path = require("path")
 const morgan = require("morgan")
 const expressLayouts = require('express-ejs-layouts')
-const passport = require('passport')
-const JwtStrategy = require('passport-jwt').Strategy
-const ExtractJwt = require('passport-jwt').ExtractJwt
+const session = require('express-session')
+const { redirectToLogin, redirectToHome } = require('./redirectMiddleware')
 
-const { port, access_secret } = require("./config")
+// const passport = require('passport')
+// const JwtStrategy = require('passport-jwt').Strategy
+// const ExtractJwt = require('passport-jwt').ExtractJwt
+
+const { port } = require("./config")
 
 // Require routes
 const homeRouter = require("./routes/home.js")
 const signupRouter = require("./routes/signup.js")
 const loginRouter = require("./routes/login.js")
+const emailRouter = require("./routes/email.js")
 
 const app = express()
 
@@ -26,39 +30,27 @@ app.use(expressLayouts)
 app.set('layout', './layouts/main')
 app.set('view engine', 'ejs')
 
-// Passport auth
-const passportOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: access_secret
-}
 
-passport.use(
-  new JwtStrategy(passportOptions, async (jwtPayload, done) => {
-    console.log(jwtPayload)
-    console.log(passport)
-    try {
-      db.oneOrNone("SELECT * FROM users WHERE id = $1", jwtPayload.sub)
-      .then((user) => {
-        if (user == null) throw new Error('Email or password invalid')
-        return done(null, user)
-      }).catch((err) => {
-        console.log(err)
-        // TODO: error catching
-      }) 
-    } catch (error) {
-      console.error(error)
-      return done(error, false)
+// Configure session middleware
+const IN_PROD = process.env.NODE_ENV === 'production'
+
+app.use(session({
+    secret: "15192174f3cf78acd0a397d744ddadde8934aded16de78eecd824fb818838d0af9bd6700b8b672fff59fe33baeb1c9e38291f44660868dd06e7499d2",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60 * 60 * 1000, // 1 hour
+      secure: IN_PROD
     }
   })
 )
 
-app.use(passport.initialize())
-
 
 // Use routers
-app.use("/signup", signupRouter)
-app.use("/login", loginRouter)
-app.use("/", homeRouter)
+app.use("/signup", redirectToHome, signupRouter)
+app.use("/login", redirectToHome, loginRouter)
+app.use("/email", emailRouter)
+app.use("/", redirectToLogin, homeRouter)
 
 
 

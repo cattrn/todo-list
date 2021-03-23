@@ -1,4 +1,5 @@
-<p><% err.message %></p>
-<% if (is_active === false) { %>
+<p><%= err.message %></p>
+<!-- <% if (typeof is_active === undefined) { let is_active = true } %> -->
+<% if (typeof is_not_active === undefined) { %>
   <p>User hasn't confirmed their email address</p>
 <% } %>
