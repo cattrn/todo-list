@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('../db/database.js')
 
 router.get('/', (req, res) => {
-  db.one("SELECT * FROM users WHERE id = $1", req.session.userId)
+  db.one("SELECT id, email, TO_CHAR(start_of_day, 'HH:MM') start_of_day FROM users WHERE id = $1", req.session.userId)
   .then((user) => {
     res.render('pages/settings', {
       user: user

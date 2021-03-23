@@ -1,19 +1,22 @@
 <main>
-  <h1>Settings</h1>
-  <p><%= user.email %></p>
-  <div class="start-of-day">
-    <label for="start-of-day">Start of day: <%= user.start_of_day %></label>
-    <div class="flex">
-      <input id="start-of-day" type="time" name="start-of-day" placeholder="When does your day start?">
-      <button class="change-start-of-day">Set</button>
+  <div class="vertical-center">
+    <h1>Settings</h1>
+    <p><%= user.email %></p>
+    <div class="start-of-day">
+      <label for="start-of-day">Current start of day: <%= user.start_of_day %></label>
+      <div class="flex">
+        <input id="start-of-day" type="text" name="start-of-day" placeholder="When does your day start?">
+        <button class="change-start-of-day">Set</button>
+      </div>
+      <small>Format: HH:MM in 24 hour time</small>
     </div>
+    <!-- <div class="flex">
+      TODO: Add links for how to use and making requests
+    </div> -->
+    <form method="GET" action="/logout">
+      <button class="logout center">Sign out</button>
+    </form>
   </div>
-  <!-- <div class="flex">
-    TODO: Add links for how to use and making requests
-  </div> -->
-  <form method="GET" action="/logout">
-    <button class="logout center">Sign out</button>
-  </form>
 </main>
 
 <%- include('../partials/nav.ejs') %>
