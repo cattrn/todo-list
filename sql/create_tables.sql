@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     user_id INT NOT NULL,
     task VARCHAR(255) NOT NULL,
     due_date TIMESTAMPTZ,
+    complete BOOLEAN NOT NULL DEFAULT false,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ DEFAULT now(),
 

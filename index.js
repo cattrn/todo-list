@@ -13,6 +13,7 @@ const homeRouter = require("./routes/home.js")
 const signupRouter = require("./routes/signup.js")
 const loginRouter = require("./routes/login.js")
 const emailRouter = require("./routes/email.js")
+const apiRouter = require("./routes/api.js")
 
 const app = express()
 
@@ -46,6 +47,7 @@ app.use(session({
 app.use("/signup", redirectToHome, signupRouter)
 app.use("/login", redirectToHome, loginRouter)
 app.use("/email", emailRouter)
+app.use("/api", apiRouter)
 app.use("/", redirectToLogin, homeRouter)
 
 
