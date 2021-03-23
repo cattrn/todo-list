@@ -11,6 +11,7 @@ const { port } = require("./config")
 // Require routes
 const homeRouter = require("./routes/home.js")
 const allTasksRouter = require("./routes/allTasks.js")
+const addTaskRouter = require("./routes/addTask.js")
 const signupRouter = require("./routes/signup.js")
 const loginRouter = require("./routes/login.js")
 const emailRouter = require("./routes/email.js")
@@ -50,6 +51,7 @@ app.use("/login", redirectToHome, loginRouter)
 app.use("/email", emailRouter)
 app.use("/api", redirectToLogin, apiRouter)
 app.use("/alltasks", redirectToLogin, allTasksRouter)
+app.use("/addtask", redirectToLogin, addTaskRouter)
 app.use("/", redirectToLogin, homeRouter)
 
 

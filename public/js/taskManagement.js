@@ -1,7 +1,9 @@
+// TODO: put JSON request functions into seperate function - need to find a way to pass if they're todays tasks or all tasks
+
 // display all current tasks in table
 const displayAllTasks = () => {
   completeTasks()
-  
+
   $.getJSON("/api/alltasks")
   .then((tasks) => {
     if (tasks.length > 0) {

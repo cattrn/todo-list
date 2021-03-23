@@ -1,0 +1,25 @@
+<main>
+  <h1>Add task</h1>
+  <form method="POST" action="/addtask">
+    <div>
+      <label for="task" class="hidden"></label>
+      <input type="text" id="task" name="task" required placeholder="New task">
+    </div>
+    <div class="task-type flex">
+      <div>
+        <input type="radio" id="one-off-task" name="task-type" value="One-off task">
+        <label for="one-off-task">One-off task</label>
+      </div>
+      <div>
+        <input type="radio" id="recurring-task" name="task-type" value="Recurring task">
+        <label for="recurring-task">Recurring task</label>
+      </div>
+    </div>
+    <!-- fields added dynamically here for different types -->
+    <button type="submit">Add task</button>
+  </form>
+</main>
+
+<%- include('../partials/nav.ejs') %>
+
+<script src="/static/js/addTaskFunctions.js"></script>
