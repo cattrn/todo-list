@@ -1,6 +1,6 @@
-![contributor shield](https://img.shields.io/badge/Contributors-1-%23c24d89?style=for-the-badge)
+![contributor shield](https://img.shields.io/github/contributors/cattrn/todoli?style=for-the-badge)
 ![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-[![heroku shield](https://img.shields.io/badge/Heroku-todoli--app-%2358488a?style=for-the-badge)](https://todoli-app.herokuapp.com/)
+[![heroku shield](https://img.shields.io/badge/Heroku-todoli--app-%2379589F?style=for-the-badge)](https://todoli-app.herokuapp.com/)
 
 # Todoli
 
@@ -14,7 +14,7 @@ A simple to do app that prioritises ease of use. Includes a view for today's tas
 - [ ] Allow users to change what time tasks reset
 
 ## Demo 
-[![heroku shield](https://img.shields.io/badge/Heroku-todoli--app-%2358488a?style=for-the-badge)](https://todoli-app.herokuapp.com/)
+[![heroku shield](https://img.shields.io/badge/Heroku-todoli--app-%2379589F?style=for-the-badge)](https://todoli-app.herokuapp.com/)
 
 ## Technologies/Frameworks used:
 
@@ -39,7 +39,7 @@ npm install
 PORT=YOUR_PORT_NUMBER
 
 POSTGRES_PORT=YOUR_POSTGRESQL_PORT
-POSTGRES_DATABASE="pathe_gaumont"
+POSTGRES_DATABASE="todo"
 POSTGRES_USERNAME="your_postgresql_username"
 POSTGRES_PASSWORD="your_postgresql_password"
 
