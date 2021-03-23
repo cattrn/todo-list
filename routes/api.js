@@ -14,7 +14,7 @@ router.get('/todaystasks', (req, res) => {
 })
 
 router.get('/alltasks', (req, res) => {
-  db.any("SELECT id, user_id, task, TO_CHAR(due_date, 'DD Mon') due_date FROM tasks WHERE user_id = $1", req.session.userId)
+  db.any("SELECT id, user_id, task, TO_CHAR(due_date, 'DD Mon') due_date, complete FROM tasks WHERE user_id = $1", req.session.userId)
   .then((tasks) => {
     res.json(tasks)
   })
@@ -25,7 +25,7 @@ router.get('/alltasks', (req, res) => {
 })
 
 router.put('/completetask', (req, res) => {
-  db.none("UPDATE tasks SET complete = $1 WHERE id = $2", [req.body.complete, req.body.id])
+  db.none("UPDATE tasks SET complete = $1 WHERE id = $2 AND user_id = $3", [req.body.complete, req.body.id, req.session.userId])
   .then(() => {
     res.end()
   })

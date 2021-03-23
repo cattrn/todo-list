@@ -1,16 +1,28 @@
 // display all current tasks in table
 const displayAllTasks = () => {
+  completeTasks()
+  
   $.getJSON("/api/alltasks")
   .then((tasks) => {
     if (tasks.length > 0) {
       $.each(tasks, (i, task) => {
-        $('.tasks').append(`
+        let taskHTML = ''
+        if (task.complete) {
+          taskHTML = `
+          <tr class="old-task completed" id="task-${task.id}">
+            <td><strong>${task.task}</strong><br/ >${task.due_date}</td>
+            <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
+          </tr>
+          `
+        } else {
+          taskHTML = `
           <tr class="old-task" id="task-${task.id}">
             <td><strong>${task.task}</strong><br/ >${task.due_date}</td>
             <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
           </tr>
           `
-        )
+        }
+        $('.tasks').append(taskHTML)
       })
     } else {
       $('table').after(`
@@ -29,47 +41,7 @@ const displayAllTasks = () => {
 }
 
 const displayTodaysTasks = () => {
-
-  // strikethrough on click
-  $('table').on('click', '.old-task', function() {
-    $(this).toggleClass('completed')
-
-    // if task has "completed" class, set complete = true in db
-    if($(this).attr('class').slice(9) === 'completed') {
-      const taskId = $(this).attr('id').slice(5)
-      const taskComplete = true
-      $.ajax({
-        url: '/api/completetask',
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify({
-          id: taskId,
-          complete: taskComplete
-        })
-      })
-      .fail((err) => {
-        console.log(err)
-        // TODO: error catching
-      })
-      // if it doesn't have "completed" class, set complete = false in db
-    } else {
-      const taskId = $(this).attr('id').slice(5)
-      const taskComplete = false
-      $.ajax({
-        url: '/api/completetask',
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify({
-          id: taskId,
-          complete: taskComplete
-        })
-      })
-      .fail((err) => {
-        console.log(err)
-        // TODO: error catching
-      })
-    } 
-  })
+  completeTasks()
 
   $.getJSON("/api/todaystasks")
   .then((tasks) => {
@@ -147,6 +119,49 @@ $('.add-task-today').click(function (e) {
     })
   }
 })
+
+const completeTasks = () => {
+  // strikethrough on click
+  $('table').on('click', '.old-task', function() {
+    $(this).toggleClass('completed')
+
+    // if task has "completed" class, set complete = true in db
+    if($(this).attr('class').slice(9) === 'completed') {
+      const taskId = $(this).attr('id').slice(5)
+      const taskComplete = true
+      $.ajax({
+        url: '/api/completetask',
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          id: taskId,
+          complete: taskComplete
+        })
+      })
+      .fail((err) => {
+        console.log(err)
+        // TODO: error catching
+      })
+      // if it doesn't have "completed" class, set complete = false in db
+    } else {
+      const taskId = $(this).attr('id').slice(5)
+      const taskComplete = false
+      $.ajax({
+        url: '/api/completetask',
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          id: taskId,
+          complete: taskComplete
+        })
+      })
+      .fail((err) => {
+        console.log(err)
+        // TODO: error catching
+      })
+    } 
+  })
+}
 
 
 // delete completed tasks from db

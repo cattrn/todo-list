@@ -1,21 +1,24 @@
-<h1>Today's tasks</h1>
+<main>
+  <h1>Today's tasks</h1>
 
-<table>
-  <tbody class="tasks">
-    <tr class="new-task">
-      <!-- This is going to be where people can insert new tasks -->
-      <td><label for="task" class="hidden"></label><input type="text" id="task" name="task" required placeholder="New task for today"></td>
-      <td><button class="add-task-today">Add task</a></td>
-    </tr>
-    <tr class="new-task-alert hidden">
-      <td class="alert" colspan="3">Invalid input</td>
-    </tr>
-    <!-- tasks loaded dynamically via jquery -->
-    </tbody>
-  </table>
-  <button class="remove-completed center">Remove completed tasks</button>
+  <table>
+    <tbody class="tasks">
+      <tr class="new-task">
+        <!-- This is going to be where people can insert new tasks -->
+        <td><label for="task" class="hidden"></label><input type="text" id="task" name="task" required placeholder="New task for today"></td>
+        <td><button class="add-task-today">Add task</a></td>
+      </tr>
+      <tr class="new-task-alert hidden">
+        <td class="alert" colspan="3">Invalid input</td>
+      </tr>
+      <!-- tasks loaded dynamically via jquery -->
+      </tbody>
+    </table>
+    <button class="remove-completed center">Remove completed tasks</button>
+  </main>
 
-
+  <%- include('../partials/nav.ejs') %>
+  
   <script src="/static/js/taskManagement.js"></script>
   <script src="/static/js/utils.js"></script>
   <script>

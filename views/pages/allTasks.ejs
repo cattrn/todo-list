@@ -1,9 +1,14 @@
-<h1>All Tasks</h1>
-<table>
-  <tbody class="tasks">
-    <!-- tasks loaded dynamically via jquery -->
-  </tbody>
-</table>
+<main>
+  <h1>All Tasks</h1>
+  <table>
+    <tbody class="tasks">
+      <!-- tasks loaded dynamically via jquery -->
+    </tbody>
+  </table>
+  <button class="remove-completed center">Remove completed tasks</button>
+</main>
+
+<%- include('../partials/nav.ejs') %>
 
 <script src="/static/js/taskManagement.js"></script>
 <script src="/static/js/utils.js"></script>
