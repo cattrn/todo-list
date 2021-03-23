@@ -139,6 +139,10 @@ button.change-start-of-day {
   margin-bottom: 0;
 }
 
+#task {
+  text-align: left;
+}
+
 
 /* ------------ TABLE STYLING ------------ */
 

@@ -26,9 +26,10 @@ const displayAllTasks = () => {
         }
         $('.tasks').append(taskHTML)
       })
+      $('table').after('<button class="remove-completed center">Remove completed tasks</button>')
     } else {
       $('table').after(`
-      <h2 class="tasks-complete">You've completed all your tasks, incredible!</h2>
+      <h2 class="tasks-complete">You've completed all your tasks, you're amazing!</h2>
       `)
     }
   })
@@ -67,9 +68,10 @@ const displayTodaysTasks = () => {
         }
         $('.tasks').append(taskHTML)
       })
+      $('table').after('<button class="remove-completed center">Remove completed tasks</button>')
     } else {
       $('table').after(`
-      <h2 class="tasks-complete">You've completed all your tasks for today, you're amazing!</h2>
+      <h2 class="tasks-complete">You've completed all your tasks for today, incredible!</h2>
       `)
     }
   })
@@ -109,7 +111,12 @@ $('.add-task-today').click(function (e) {
         <td>${newTask}</td>
         <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
         </tr>
-        `);
+        `)
+        let removeButton = $('.remove-completed')
+        if (removeButton.length === 0) {
+          $('table').after('<button class="remove-completed center">Remove completed tasks</button>')
+        }
+        $('#task').val("")
       })
       .catch((err) => {
         console.log(err)
@@ -167,7 +174,7 @@ const completeTasks = () => {
 
 
 // delete completed tasks from db
-$('.remove-completed').click(function() {
+$('body').on('click', '.remove-completed', function() {
   $.ajax({
     url: '/api/deletetasks',
     type: 'DELETE',
