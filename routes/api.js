@@ -3,11 +3,12 @@ const router = express.Router()
 const db = require('../db/database')
 
 router.get('/todaystasks', (req, res) => {
-  // db.one("SELECT id, start_of_day FROM users WHERE id = $1", req.session.userId)
-  // .then((user) => {
-  //   let start_of_day = Number(user.start_of_day.slice(0, 2))
+  db.one("SELECT id, start_of_day FROM users WHERE id = $1", req.session.userId)
+  .then((user) => {
+    let hours = Number(user.start_of_day.slice(0, 2))
+    let minutes = Number(user.start_of_day.slice(3, 5))
 
-    db.any("SELECT id, user_id, task, due_date, complete FROM tasks WHERE user_id = $1 AND due_date >= date_trunc('day', now()) AND due_date < (date_trunc('day', now()) + INTERVAL '1 day') ORDER BY complete ASC, task ASC", req.session.userId)
+    db.any("SELECT id, user_id, task, date_trunc('day', due_date) due_date, complete FROM tasks WHERE user_id = $1 AND due_date = date_trunc('day', (now() - INTERVAL '$2 hours $3 minutes')) ORDER BY complete ASC, task ASC", [req.session.userId, hours, minutes])
     .then((tasks) => {
       res.json(tasks)
     })
@@ -15,11 +16,11 @@ router.get('/todaystasks', (req, res) => {
       console.log(err)
       // TODO: error catch
     })
-  // })
-  // .catch((err) => {
-  //   console.log(err)
-  //   // TODO: error catch
-  // }) 
+  })
+  .catch((err) => {
+    console.log(err)
+      // TODO: error catch
+  })
 })
 
 router.get('/alltasks', (req, res) => {
