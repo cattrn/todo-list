@@ -3,7 +3,16 @@ const router = express.Router()
 const db = require('../db/database.js')
 
 router.get('/', (req, res) => {
-  res.render('pages/addTask')
+  db.oneOrNone("SELECT * FROM tasks WHERE user_id = $1 AND id = $2", [req.session.userId, req.query.taskid])
+  .then((task) => {
+    res.render('pages/editTask', {
+      task: task
+    })
+  })
+  .catch((err) => {
+    console.log(err)
+    // TODO: error catching
+  })
 })
 
 router.post('/', (req, res) => {

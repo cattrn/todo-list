@@ -13,14 +13,14 @@ const displayAllTasks = () => {
           taskHTML = `
           <tr class="old-task completed" id="task-${task.id}">
             <td><strong>${task.task}</strong><br/ >${task.due_date}</td>
-            <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
+            <td><a class="edit" href="/editask?taskid=${task.id}"><i class="fas fa-pencil-alt"></i></a></td>
           </tr>
           `
         } else {
           taskHTML = `
           <tr class="old-task" id="task-${task.id}">
             <td><strong>${task.task}</strong><br/ >${task.due_date}</td>
-            <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
+            <td><a class="edit" href="/editask?taskid=${task.id}"><i class="fas fa-pencil-alt"></i></a></td>
           </tr>
           `
         }
@@ -55,14 +55,14 @@ const displayTodaysTasks = () => {
           taskHTML = `
           <tr class="old-task completed" id="task-${task.id}">
             <td>${task.task}</td>
-            <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
+            <td><a class="edit" href="/editask?taskid=${task.id}"><i class="fas fa-pencil-alt"></i></a></td>
           </tr>
           `
         } else {
           taskHTML = `
           <tr class="old-task" id="task-${task.id}">
             <td>${task.task}</td>
-            <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
+            <td><a class="edit" href="/editask?taskid=${task.id}"><i class="fas fa-pencil-alt"></i></a></td>
           </tr>
           `
         }
@@ -109,7 +109,7 @@ $('.add-task-today').click(function (e) {
         $('.new-task-alert').after(`
         <tr class="old-task" id="task-${tasks[tasks.length - 1].id}">
         <td>${newTask}</td>
-        <td><a class="edit"><i class="fas fa-pencil-alt"></i></a></td>
+        <td><a class="edit" href="/editask?taskid=${tasks[tasks.length - 1].id}"><i class="fas fa-pencil-alt"></i></a></td>
         </tr>
         `)
         let removeButton = $('.remove-completed')
@@ -131,12 +131,12 @@ $('.add-task-today').click(function (e) {
 
 const completeTasks = () => {
   // strikethrough on click
-  $('table').on('click', '.old-task', function() {
-    $(this).toggleClass('completed')
+  $('table').on('click', '.old-task > td:first-child', function() {
+    $(this).parent().toggleClass('completed')
 
     // if task has "completed" class, set complete = true in db
-    if($(this).attr('class').slice(9) === 'completed') {
-      const taskId = $(this).attr('id').slice(5)
+    if($(this).parent().attr('class').slice(9) === 'completed') {
+      const taskId = $(this).parent().attr('id').slice(5)
       const taskComplete = true
       $.ajax({
         url: '/api/completetask',
@@ -153,7 +153,7 @@ const completeTasks = () => {
       })
       // if it doesn't have "completed" class, set complete = false in db
     } else {
-      const taskId = $(this).attr('id').slice(5)
+      const taskId = $(this).parent().attr('id').slice(5)
       const taskComplete = false
       $.ajax({
         url: '/api/completetask',
