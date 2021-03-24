@@ -183,6 +183,7 @@ tr.old-task > td:last-child {
 
 .completed {
   text-decoration: line-through;
+  background-color: rgba(150, 150, 150, 0.5);
 }
 
 
