@@ -2,14 +2,14 @@
   <div class="vertical-center">
     <h1>Settings</h1>
     <p><%= user.email %></p>
-    <div class="start-of-day">
+    <form class="start-of-day" action="/settings" method="POST">
       <label for="start-of-day">Current start of day: <%= user.start_of_day %></label>
       <div class="flex">
         <input id="start-of-day" type="text" name="start-of-day" placeholder="When does your day start?">
         <button class="change-start-of-day">Set</button>
       </div>
       <small>Format: HH:MM in 24 hour time</small>
-    </div>
+    </form>
     <!-- <div class="flex">
       TODO: Add links for how to use and making requests
     </div> -->

@@ -16,9 +16,14 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  
-
-  
+  db.none("UPDATE users SET start_of_day = $1 WHERE id = $2", [req.body['start-of-day'], req.session.userId])
+  .then(() => {
+    res.redirect('/settings')
+  })
+  .catch((err) => {
+    console.log(err)
+    // TODO: error catching
+  })
 })
 
 
