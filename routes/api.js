@@ -3,6 +3,20 @@ const router = express.Router()
 const db = require('../db/database')
 
 router.get('/todaystasks', (req, res) => {
+  // db.any("SELECT id, user_id, task, frequency, start_date FROM recurring_tasks WHERE user_id = $1", req.sesssion.userId)
+  // .then((allRecurringTasks) => {
+
+  // })
+  // .catch((err) => {
+  //   console.log(err)
+  //   // TODO: error catching
+  // })
+
+
+
+
+
+  // show tasks from when the start of day begins past midnight up until start of day on the next day
   db.one("SELECT id, start_of_day FROM users WHERE id = $1", req.session.userId)
   .then((user) => {
     let hours = Number(user.start_of_day.slice(0, 2))
@@ -25,6 +39,17 @@ router.get('/todaystasks', (req, res) => {
 
 router.get('/alltasks', (req, res) => {
   db.any("SELECT id, user_id, task, TO_CHAR(due_date, 'DD Mon') due_date, complete FROM tasks WHERE user_id = $1 ORDER BY due_date ASC, complete ASC, task ASC", req.session.userId)
+  .then((tasks) => {
+    res.json(tasks)
+  })
+  .catch((err) => {
+    console.log(err)
+    // TODO: error catch
+  })
+})
+
+router.get('/allrecurringtasks', (req, res) => {
+  db.any("SELECT id, user_id, task, frequency, TO_CHAR(start_date, 'DD Mon YYYY') start_date FROM recurring_tasks WHERE user_id = $1 ORDER BY frequency ASC, task ASC", req.session.userId)
   .then((tasks) => {
     res.json(tasks)
   })

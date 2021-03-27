@@ -26,12 +26,13 @@ const displayAllTasks = () => {
         }
         $('.tasks').append(taskHTML)
       })
-      $('table').after('<button class="remove-completed center">Remove completed tasks</button>')
-    } else {
-      $('table').after(`
-      <h2 class="tasks-complete">You've completed all your tasks, you're amazing!</h2>
-      `)
-    }
+    } 
+    // TODO: Move this to it's own "if there are no rows" function
+    // else {
+    //   $('table').after(`
+    //   <h2 class="tasks-complete">You've completed all your tasks, you're amazing!</h2>
+    //   `)
+    // }
   })
   .catch((err) => {
     $('.tasks').append(`
@@ -41,6 +42,42 @@ const displayAllTasks = () => {
     </tr>
     `)
   })
+
+  // add recurring tasks
+  $.getJSON("/api/allrecurringtasks")
+  .then((tasks) => {
+    if (tasks.length > 0) {
+      $.each(tasks, (i, task) => {
+
+        let frequency = ''
+        if (task.frequency === 1) frequency = 'Daily'
+        if (task.frequency === 2) frequency = 'Every 2 days'
+        if (task.frequency === 7) frequency = 'Weekly'
+
+        let taskHTML = `
+        <tr class="old-task recurring" id="task-${task.id}">
+          <td><strong>${task.task}</strong><br/ >${frequency}</td>
+          <td><a class="edit" href="/editask?taskid=${task.id}"><i class="fas fa-pencil-alt"></i></a></td>
+        </tr>
+        `
+        $('.tasks').append(taskHTML)
+      })
+    } 
+  })
+  .catch((err) => {
+    $('.tasks').append(`
+    <tr>
+      <td colspan="3">We could not retreive your recurring tasks.</td>
+      <td coldpan="3">${err.message}</td>
+    </tr>
+    `)
+  })
+
+  if ($('.tasks').html() !== '') {
+    $('table').after('<button class="remove-completed center">Remove completed tasks</button>')
+  } else {
+    $('table').after(`<h2 class="tasks-complete">You've completed all your tasks, you're amazing!</h2>`)
+  }
 }
 
 const displayTodaysTasks = () => {

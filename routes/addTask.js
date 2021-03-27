@@ -17,7 +17,14 @@ router.post('/', (req, res) => {
       // TODO: error catching
     })
   } else if (req.body['task-type'] === 'Recurring task') {
-    // TODO: recurring task post
+    db.none("INSERT INTO recurring_tasks(user_id, task, frequency, start_date, created_at) VALUES ($1, $2, $3, $4, now())", [req.session.userId, req.body.task, req.body.frequency, req.body["start-date"]])
+    .then(() => {
+      res.redirect('/alltasks')
+    })
+    .catch((err) => {
+      console.log(err)
+      // TODO: error catching
+    })
   }
   
 })

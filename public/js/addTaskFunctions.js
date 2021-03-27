@@ -17,8 +17,9 @@ $('#recurring-task').click(() => {
       <label for="frequency" class="hidden"></label>
       <select name="frequency" id="frequency">
           <option value="">Frequency</option>
-          <option value="daily">Every day</option>
-          <option value="weekly">Every week</option>
+          <option value="1">Every day</option>
+          <option value="2">Every 2 days</option>
+          <option value="7">Weekly</option>
       </select>
     </div>
 
