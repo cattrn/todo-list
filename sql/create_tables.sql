@@ -8,6 +8,22 @@ CREATE TABLE IF NOT EXISTS users (
   start_of_day TIME DEFAULT '05:00:00'
 )
 
+DROP TABLE IF EXISTS recurring_tasks; 
+
+CREATE TABLE IF NOT EXISTS recurring_tasks (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
+  task VARCHAR(255) NOT NULL,
+  frequency INT NOT NULL,
+  start_date TIMESTAMPTZ,
+  created_at TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ DEFAULT now(),
+
+  FOREIGN KEY(user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+)
+
 DROP TABLE IF EXISTS tasks; 
 
 CREATE TABLE IF NOT EXISTS tasks (
@@ -16,12 +32,19 @@ CREATE TABLE IF NOT EXISTS tasks (
   task VARCHAR(255) NOT NULL,
   due_date TIMESTAMPTZ,
   complete BOOLEAN NOT NULL DEFAULT false,
+  recurring_id INT,
   created_at TIMESTAMPTZ,
   updated_at TIMESTAMPTZ DEFAULT now(),
 
-  FOREIGN KEY(user_id)
-    REFERENCES users(id)
-    ON DELETE CASCADE
+  CONSTRAINT fk_user
+    FOREIGN KEY(user_id)
+      REFERENCES users(id)
+      ON DELETE CASCADE
+
+  CONSTRAINT fk_recurring
+    FOREIGN KEY(recurring_id)
+      REFERENCES recurring_tasks(id)
+      ON DELETE CASCADE
 )
 
 DROP TABLE IF EXISTS email_confirmation;
