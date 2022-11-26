@@ -1,6 +1,5 @@
 ![contributor shield](https://img.shields.io/github/contributors/cattrn/todoli?style=for-the-badge)
 ![license shield](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-[![heroku shield](https://img.shields.io/badge/Heroku-todoli--app-%2379589F?style=for-the-badge)](https://todoli-app.herokuapp.com/)
 
 # Todoli
 
@@ -12,9 +11,6 @@ A simple to do app that prioritises ease of use. Includes a view for today's tas
 - [ ] Radio button styling
 - [ ] Password reset
 - [ ] Allow users to change what time tasks reset
-
-## Demo 
-[![heroku shield](https://img.shields.io/badge/Heroku-todoli--app-%2379589F?style=for-the-badge)](https://todoli-app.herokuapp.com/)
 
 ## Technologies/Frameworks used:
 
